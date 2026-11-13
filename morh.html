@@ -1,0 +1,1166 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>OMAR DEV ENGINE - Multi-Language AI Code Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@600;700&family=Tajawal:wght@400;500;700;800;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & Core Variables */
+    :root {
+      --bg-deep: #080b14;
+      --card-glass: rgba(14, 20, 36, 0.78);
+      --border-glass: rgba(255, 255, 255, 0.09);
+      --cyan: #00f2fe;
+      --purple: #7b2cbf;
+      --pink: #ff007f;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-deep);
+      background-image:
+        radial-gradient(circle at 12% 10%, rgba(0, 242, 254, 0.12) 0%, transparent 42%),
+        radial-gradient(circle at 88% 18%, rgba(123, 44, 191, 0.16) 0%, transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(255, 0, 127, 0.08) 0%, transparent 45%);
+      color: var(--text-main);
+      font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+      padding-bottom: 60px;
+    }
+
+    /* Guarantee Instant Touch & Click Responsiveness */
+    button, textarea, input, select {
+      position: relative;
+      z-index: 25;
+      touch-action: manipulation;
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.14s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    button:active {
+      transform: scale(0.96);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* Sleek Glassmorphism Hero Header */
+    .hero-header {
+      text-align: center;
+      padding: 32px 16px 26px;
+      margin-bottom: 22px;
+      background: linear-gradient(180deg, rgba(0, 242, 254, 0.07) 0%, rgba(123, 44, 191, 0.05) 55%, rgba(8, 11, 20, 0) 100%);
+      border-bottom: 1px solid rgba(0, 242, 254, 0.16);
+      position: relative;
+    }
+
+    .omar-title {
+      font-family: 'Orbitron', 'Rajdhani', "Arial Black", sans-serif;
+      font-size: clamp(3rem, 10vw, 4.9rem);
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #00f2fe 0%, #9d4edd 48%, #ff007f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      line-height: 1.05;
+      filter: drop-shadow(0 0 26px rgba(0, 242, 254, 0.35));
+    }
+
+    .hero-subtitle {
+      font-family: 'Rajdhani', 'Orbitron', sans-serif;
+      font-size: clamp(0.85rem, 2.8vw, 1.05rem);
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      color: var(--cyan);
+      margin-top: 8px;
+      direction: ltr;
+      text-transform: uppercase;
+    }
+
+    .hero-pills {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .pill {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--border-glass);
+      color: #cbd5e1;
+      backdrop-filter: blur(10px);
+    }
+
+    .pill.glow {
+      border-color: rgba(0, 242, 254, 0.45);
+      color: var(--cyan);
+      background: rgba(0, 242, 254, 0.09);
+    }
+
+    /* Multi-Language Selector Grid */
+    .lang-section-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lang-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 680px) {
+      .lang-grid {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+
+    .lang-btn {
+      background: var(--card-glass);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid var(--border-glass);
+      border-radius: 15px;
+      padding: 13px 8px;
+      color: #cbd5e1;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .lang-btn:hover {
+      border-color: rgba(0, 242, 254, 0.4);
+      color: #ffffff;
+    }
+
+    .lang-btn .lang-name {
+      font-family: 'Rajdhani', 'Orbitron', sans-serif;
+      font-size: 1.02rem;
+      font-weight: 700;
+      direction: ltr;
+      letter-spacing: 0.04em;
+    }
+
+    .lang-btn .lang-ext {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      direction: ltr;
+    }
+
+    .lang-btn.active {
+      background: linear-gradient(145deg, rgba(0, 242, 254, 0.16), rgba(123, 44, 191, 0.22));
+      border-color: var(--cyan);
+      color: #ffffff;
+      box-shadow: 0 0 22px rgba(0, 242, 254, 0.25);
+    }
+
+    .lang-btn.active .lang-ext {
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    /* Glassmorphism Main Input Card */
+    .glass-card {
+      background: var(--card-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-glass);
+      border-radius: 22px;
+      padding: 20px;
+      margin-bottom: 22px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .card-label {
+      font-size: 1.02rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .active-lang-badge {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(123, 44, 191, 0.25);
+      border: 1px solid rgba(157, 78, 221, 0.5);
+      color: #e0aaff;
+      direction: ltr;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 112px;
+      background: rgba(5, 8, 17, 0.85);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      border-radius: 15px;
+      padding: 15px;
+      color: #ffffff;
+      font-size: 1.03rem;
+      line-height: 1.65;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    textarea:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 18px rgba(0, 242, 254, 0.2);
+    }
+
+    .actions-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-clear {
+      background: rgba(30, 41, 59, 0.75);
+      color: #cbd5e1;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .btn-clear:hover {
+      border-color: var(--pink);
+      color: #ff85c0;
+    }
+
+    .btn-generate {
+      flex: 1;
+      min-width: 220px;
+      background: linear-gradient(90deg, #00f2fe 0%, #7b2cbf 52%, #ff007f 100%);
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+      border: none;
+      padding: 15px 26px;
+      border-radius: 14px;
+      font-size: 1.08rem;
+      font-weight: 900;
+      box-shadow: 0 8px 26px rgba(123, 44, 191, 0.45);
+    }
+
+    .btn-generate:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    /* Quick Prompt Chips */
+    .chips-box {
+      margin-top: 18px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .chips-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .chips-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip-btn {
+      background: rgba(15, 23, 42, 0.85);
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 8px 13px;
+      border-radius: 11px;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .chip-btn:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(0, 242, 254, 0.08);
+    }
+
+    /* Progress & AI Status Card */
+    .progress-card {
+      display: none;
+      background: var(--card-glass);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--cyan);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 22px;
+      text-align: center;
+      box-shadow: 0 0 28px rgba(0, 242, 254, 0.18);
+    }
+
+    .spinner-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .neon-spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(0, 242, 254, 0.2);
+      border-top-color: var(--cyan);
+      border-right-color: var(--pink);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .progress-title {
+      color: var(--cyan);
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .bar-bg {
+      width: 100%;
+      height: 7px;
+      background: rgba(5, 8, 17, 0.9);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .bar-anim {
+      width: 38%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
+      border-radius: 99px;
+      animation: slideBar 1.3s ease-in-out infinite;
+    }
+
+    @keyframes slideBar {
+      0% { transform: translateX(120%); }
+      100% { transform: translateX(-280%); }
+    }
+
+    /* Output Area */
+    .output-area {
+      display: none;
+    }
+
+    /* Code Output Box with Sticky Top Copy & Download Header */
+    .code-viewer-card {
+      background: #05070e;
+      border: 1.5px solid rgba(0, 242, 254, 0.35);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.65);
+    }
+
+    .code-sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: linear-gradient(90deg, #0d1426 0%, #15112b 100%);
+      border-bottom: 1px solid rgba(0, 242, 254, 0.28);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .header-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      direction: ltr;
+    }
+
+    .mac-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .mac-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+
+    .code-lang-badge {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: rgba(0, 242, 254, 0.14);
+      border: 1px solid rgba(0, 242, 254, 0.4);
+      color: var(--cyan);
+    }
+
+    .code-file-name {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* High-Visibility Top Copy Code Button */
+    .btn-copy-top {
+      background: linear-gradient(90deg, #00f2fe 0%, #00c6ff 100%);
+      color: #041019;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 0.94rem;
+      font-weight: 900;
+      box-shadow: 0 4px 18px rgba(0, 242, 254, 0.38);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-copy-top.copied {
+      background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+      color: #031c13;
+      box-shadow: 0 4px 18px rgba(16, 185, 129, 0.45);
+    }
+
+    .btn-download-top {
+      background: rgba(123, 44, 191, 0.35);
+      color: #f3e8ff;
+      border: 1px solid rgba(192, 132, 252, 0.5);
+      padding: 10px 15px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-download-top:hover {
+      background: rgba(123, 44, 191, 0.55);
+      border-color: #e0aaff;
+    }
+
+    pre {
+      padding: 18px;
+      overflow-x: auto;
+      direction: ltr;
+      text-align: left;
+      font-family: 'Fira Code', "Courier New", monospace;
+      font-size: 0.86rem;
+      line-height: 1.65;
+      color: #e2e8f0;
+      max-height: 460px;
+      tab-size: 2;
+    }
+
+    /* Syntax Highlighting Tokens */
+    .tok-com { color: #64748b; font-style: italic; }
+    .tok-tag { color: #ff5ca8; }
+    .tok-str { color: #34d399; }
+    .tok-kw  { color: #c084fc; font-weight: 600; }
+    .tok-num { color: #fbbf24; }
+
+    /* Live Interactive Sandbox Preview (For Web / HTML Mode) */
+    .preview-card {
+      display: none;
+      background: var(--card-glass);
+      border: 1.5px solid rgba(255, 0, 127, 0.45);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: 0 14px 36px rgba(255, 0, 127, 0.14);
+    }
+
+    .preview-header {
+      padding: 12px 16px;
+      background: linear-gradient(90deg, rgba(123, 44, 191, 0.35), rgba(255, 0, 127, 0.25));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .preview-title {
+      font-size: 0.94rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .preview-btns {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-mini {
+      background: rgba(8, 11, 20, 0.7);
+      color: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 6px 12px;
+      border-radius: 9px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    iframe#liveSandbox {
+      width: 100%;
+      height: 440px;
+      border: none;
+      background: #ffffff;
+      display: block;
+    }
+
+    /* Explanation Glass Card */
+    .explain-card {
+      background: var(--card-glass);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--border-glass);
+      border-radius: 18px;
+      padding: 18px 20px;
+    }
+
+    .explain-heading {
+      color: var(--cyan);
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .explain-text {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    /* Floating Toast */
+    .toast-popup {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, var(--cyan), #38bdf8);
+      color: #041019;
+      font-weight: 900;
+      padding: 12px 24px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      z-index: 9999;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.75);
+      display: none;
+      text-align: center;
+      max-width: 92vw;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Header -->
+  <header class="hero-header">
+    <div class="omar-title">OMAR</div>
+    <div class="hero-subtitle">OMAR DEV ENGINE &bull; MULTI-LANGUAGE AI STUDIO</div>
+    <div class="hero-pills">
+      <span class="pill glow">&#10024; ذكاء اصطناعي مدمج بدون API Key</span>
+      <span class="pill">&#128640; يبرمج أي فكرة بالعربية لجميع اللغات</span>
+      <span class="pill">&#128203; نسخ فوري بضغطة واحدة</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Multi-Language Selector Tabs -->
+    <div class="lang-section-title">&#128187; اختر لغة البرمجة المطلوبة:</div>
+    <div class="lang-grid">
+      <button type="button" id="tab-web" class="lang-btn active" onclick="window.selectLanguage('web')">
+        <span class="lang-name">HTML/CSS/JS</span>
+        <span class="lang-ext">.html (Web)</span>
+      </button>
+      <button type="button" id="tab-python" class="lang-btn" onclick="window.selectLanguage('python')">
+        <span class="lang-name">Python</span>
+        <span class="lang-ext">.py</span>
+      </button>
+      <button type="button" id="tab-csharp" class="lang-btn" onclick="window.selectLanguage('csharp')">
+        <span class="lang-name">C#</span>
+        <span class="lang-ext">.cs</span>
+      </button>
+      <button type="button" id="tab-cpp" class="lang-btn" onclick="window.selectLanguage('cpp')">
+        <span class="lang-name">C++</span>
+        <span class="lang-ext">.cpp</span>
+      </button>
+      <button type="button" id="tab-php" class="lang-btn" onclick="window.selectLanguage('php')">
+        <span class="lang-name">PHP</span>
+        <span class="lang-ext">.php</span>
+      </button>
+      <button type="button" id="tab-js" class="lang-btn" onclick="window.selectLanguage('js')">
+        <span class="lang-name">JavaScript</span>
+        <span class="lang-ext">.js</span>
+      </button>
+    </div>
+
+    <!-- Main Arabic Prompt Card -->
+    <section class="glass-card">
+      <div class="card-top">
+        <span class="card-label">&#9997;&#65039; اكتب طلبك أو فكرتك باللغة العربية بالتفصيل:</span>
+        <span id="currentLangPill" class="active-lang-badge">LANG: HTML / CSS / JS (.html)</span>
+      </div>
+
+      <textarea id="promptInput" placeholder="اشرح أي فكرة أو برنامج أو موقع تريده بالعربية... مثلاً: اعمل لعبة اكس او بتصميم نيون، أو برنامج إدارة مبيعات بالبايثون، أو نظام تسجيل دخول بالـ PHP..."></textarea>
+
+      <div class="actions-bar">
+        <button type="button" class="btn-clear" onclick="window.clearPrompt()">&#128465;&#65039; مسح النص</button>
+        <button type="button" id="btnGenerate" class="btn-generate" onclick="window.runAIGenerator()">توليد الكود الآن &#9889;</button>
+      </div>
+
+      <!-- Dynamic Language Quick Prompt Chips -->
+      <div class="chips-box">
+        <div class="chips-label">&#128161; أفكار مقترحة للغة المختارة (اضغط لملء الوصف):</div>
+        <div id="promptChips" class="chips-list"></div>
+      </div>
+    </section>
+
+    <!-- Animated Progress Indicator -->
+    <div id="progressCard" class="progress-card">
+      <div class="spinner-wrap">
+        <div class="neon-spinner"></div>
+        <div id="progressStatus" class="progress-title">جاري توليد الكود المخصص عبر الذكاء الاصطناعي...</div>
+      </div>
+      <div class="bar-bg">
+        <div class="bar-anim"></div>
+      </div>
+    </div>
+
+    <!-- Output Area -->
+    <section id="outputArea" class="output-area">
+      <!-- Code Output Box with Sticky Top Copy & Download Bar -->
+      <div class="code-viewer-card">
+        <div class="code-sticky-header">
+          <div class="header-meta">
+            <div class="mac-dots">
+              <span class="mac-dot" style="background:#ff5f56;"></span>
+              <span class="mac-dot" style="background:#ffbd2e;"></span>
+              <span class="mac-dot" style="background:#27c93f;"></span>
+            </div>
+            <span id="badgeOutputLang" class="code-lang-badge">HTML/CSS/JS</span>
+            <span id="labelOutputFile" class="code-file-name">omar-app.html</span>
+          </div>
+
+          <div class="header-actions">
+            <button type="button" id="btnCopyTop" class="btn-copy-top" onclick="window.copyRawCode()">
+              <span>نسخ الكود</span>
+              <span>&#128203;</span>
+            </button>
+            <button type="button" class="btn-download-top" onclick="window.downloadRawCode()">
+              <span>تحميل الملف</span>
+              <span>&#11015;&#65039;</span>
+            </button>
+          </div>
+        </div>
+
+        <pre><code id="codeDisplay"></code></pre>
+      </div>
+
+      <!-- Automatic Live Interactive Preview (Visible in Web/HTML Mode) -->
+      <div id="previewCard" class="preview-card">
+        <div class="preview-header">
+          <span class="preview-title">&#128065;&#65039; المعاينة الحية التفاعلية (Live Sandbox)</span>
+          <div class="preview-btns">
+            <button type="button" class="btn-mini" onclick="window.refreshSandbox()">إعادة تشغيل &#8635;</button>
+            <button type="button" class="btn-mini" onclick="window.toggleSandbox()">إظهار / إخفاء</button>
+          </div>
+        </div>
+        <iframe id="liveSandbox" title="Live Interactive Preview" sandbox="allow-scripts allow-forms allow-modals"></iframe>
+      </div>
+
+      <!-- Arabic Explanation -->
+      <div class="explain-card">
+        <div class="explain-heading">&#128218; شرح الكود والوظائف البرمجية:</div>
+        <div id="explainText" class="explain-text"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toastPopup" class="toast-popup"></div>
+
+  <script>
+    // Language Configurations
+    window.LANGUAGES = {
+      web: {
+        id: "web",
+        label: "HTML / CSS / JS",
+        badge: "HTML/CSS/JS",
+        ext: ".html",
+        defaultFile: "omar-web-app.html",
+        mime: "text/html;charset=utf-8",
+        placeholder: "اوصف أي موقع أو لعبة أو أداة ويب تريدها بالعربية... مثلاً: اعمل لعبة اكس او بتصميم نيون متوهج، أو صفحة هبوط لمتجر عطور، أو ساعة رقمية نيون...",
+        chips: [
+          "اعمل لعبة اكس او (Tic Tac Toe) بتصميم نيون متوهج مع عداد نقاط وزر إعادة اللعب",
+          "صفحة هبوط احترافية لمتجر إلكترونيات حديث مع سلة مشتريات تفاعلية",
+          "ساعة رقمية نيون تعرض الوقت والتاريخ بالثواني مع أزرار تغيير الألوان",
+          "نموذج تسجيل دخول بتأثير زجاجي (Glassmorphism) مع التحقق الفوري من البيانات"
+        ]
+      },
+      python: {
+        id: "python",
+        label: "Python",
+        badge: "PYTHON",
+        ext: ".py",
+        defaultFile: "omar_script.py",
+        mime: "text/x-python;charset=utf-8",
+        placeholder: "اوصف أي برنامج أو سكريبت بايثون تريده بالعربية... مثلاً: برنامج إدارة مهام ومخزون، أو أداة تشفير كلمات المرور، أو سكريبت تحليل بيانات...",
+        chips: [
+          "برنامج بايثون متكامل لإدارة مبيعات ومخزون محل تجاري مع حساب الأرباح",
+          "أداة بايثون لتوليد وتشفير كلمات المرور القوية وفحص مستوى أمانها",
+          "لعبة تخمين الأرقام الذكية بالبايثون مع مستويات صعوبة ونظام نقاط",
+          "سكريبت بايثون لتنظيم الملفات داخل المجلدات تلقائياً حسب نوع كل ملف"
+        ]
+      },
+      csharp: {
+        id: "csharp",
+        label: "C#",
+        badge: "C#",
+        ext: ".cs",
+        defaultFile: "OmarProgram.cs",
+        mime: "text/plain;charset=utf-8",
+        placeholder: "اوصف أي برنامج بلغة C# تريده بالعربية... مثلاً: نظام إدارة حسابات بنكية بـ OOP، أو آلة حاسبة متكاملة، أو نظام إدارة طلاب...",
+        chips: [
+          "نظام إدارة حسابات بنكية بلغة C# يدعم الإيداع والسحب وكشف الحساب باستخدام OOP",
+          "برنامج C# لإدارة بيانات الطلاب وحساب المعدل التراكمي والتقدير تلقائياً",
+          "آلة حاسبة علمية متكاملة بلغة C# تدعم العمليات الحسابية المتعددة",
+          "نظام حجز تذاكر سينما بلغة C# مع عرض المقاعد المتاحة والمحجوزة"
+        ]
+      },
+      cpp: {
+        id: "cpp",
+        label: "C++",
+        badge: "C++",
+        ext: ".cpp",
+        defaultFile: "omar_app.cpp",
+        mime: "text/x-c++src;charset=utf-8",
+        placeholder: "اوصف أي برنامج بلغة C++ تريده بالعربية... مثلاً: خوارزمية فرز وبحث سريعة، أو نظام إدارة مكتبة، أو لعبة تفاعلية في الكونسول...",
+        chips: [
+          "نظام إدارة مكتبة كتب متكامل بلغة C++ يدعم الإضافة والبحث والاستعارة",
+          "برنامج C++ لحل المعادلات الرياضية والمصفوفات بدقة عالية",
+          "لعبة X-O تفاعلية لشخصين بلغة C++ مع التحقق التلقائي من الفائز",
+          "تطبيق C++ لإدارة الموظفين وحساب الرواتب والضرائب والخصومات"
+        ]
+      },
+      php: {
+        id: "php",
+        label: "PHP",
+        badge: "PHP",
+        ext: ".php",
+        defaultFile: "omar_backend.php",
+        mime: "application/x-httpd-php;charset=utf-8",
+        placeholder: "اوصف أي كود أو نظام PHP تريده بالعربية... مثلاً: نظام تسجيل دخول وحماية الجلسات، أو واجهة API بصيغة JSON، أو نموذج تواصل آمن...",
+        chips: [
+          "نظام تسجيل دخول وإنشاء حساب آمن بلغة PHP مع تشفير كلمات المرور والجلسات",
+          "واجهة REST API بلغة PHP ترجع البيانات بصيغة JSON مع معالجة الأخطاء",
+          "نموذج تواصل وإرسال رسائل بلغة PHP مع التحقق الكامل من المدخلات وحمايتها",
+          "نظام سلة مشتريات إلكترونية بلغة PHP باستخدام الجلسات (Sessions)"
+        ]
+      },
+      js: {
+        id: "js",
+        label: "JavaScript",
+        badge: "JAVASCRIPT",
+        ext: ".js",
+        defaultFile: "omar-logic.js",
+        mime: "application/javascript;charset=utf-8",
+        placeholder: "اوصف أي كود أو دالة JavaScript تريدها بالعربية... مثلاً: كلاس لإدارة سلة المشتريات، أو جلب البيانات من API، أو نظام التحقق من النماذج...",
+        chips: [
+          "كلاس JavaScript حديث لإدارة سلة المشتريات وحساب الإجمالي والخصومات",
+          "دوال JavaScript متقدمة للتحقق من صحة البريد الإلكتروني ورقم الهاتف وكلمة المرور",
+          "نظام إدارة حالة (State Manager) خفيف بلغة JavaScript النقية مع LocalStorage",
+          "مؤقت عد تنازلي احترافي بلغة JavaScript يدعم الإيقاف المؤقت والاستئناف"
+        ]
+      }
+    };
+
+    // Global State
+    window.selectedLang = "web";
+    window.rawGeneratedCode = "";
+    window.currentFileName = "omar-web-app.html";
+
+    // Toast Helper
+    window.showToast = function (msg) {
+      var toast = document.getElementById("toastPopup");
+      toast.textContent = msg;
+      toast.style.display = "block";
+      clearTimeout(window._toastTimeout);
+      window._toastTimeout = setTimeout(function () {
+        toast.style.display = "none";
+      }, 2600);
+    };
+
+    // Render Prompt Chips for Active Language
+    window.renderPromptChips = function (langKey) {
+      var config = window.LANGUAGES[langKey];
+      var container = document.getElementById("promptChips");
+      container.innerHTML = "";
+      config.chips.forEach(function (chipText) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chip-btn";
+        btn.textContent = chipText.length > 48 ? chipText.substring(0, 48) + "..." : chipText;
+        btn.onclick = function () {
+          var input = document.getElementById("promptInput");
+          input.value = chipText;
+          input.focus();
+          window.showToast("تم وضع الوصف! اضغط (توليد الكود الآن)");
+        };
+        container.appendChild(btn);
+      });
+    };
+
+    // Language Tab Switcher
+    window.selectLanguage = function (langKey) {
+      if (!window.LANGUAGES[langKey]) return;
+      window.selectedLang = langKey;
+      var config = window.LANGUAGES[langKey];
+
+      // Update Tab Active States
+      var keys = Object.keys(window.LANGUAGES);
+      for (var i = 0; i < keys.length; i++) {
+        var tabEl = document.getElementById("tab-" + keys[i]);
+        if (tabEl) {
+          tabEl.className = keys[i] === langKey ? "lang-btn active" : "lang-btn";
+        }
+      }
+
+      // Update Pill, Placeholder & Chips
+      document.getElementById("currentLangPill").textContent = "LANG: " + config.label + " (" + config.ext + ")";
+      document.getElementById("promptInput").placeholder = config.placeholder;
+      window.renderPromptChips(langKey);
+      window.showToast("تم اختيار لغة: " + config.label);
+    };
+
+    // Clear Prompt
+    window.clearPrompt = function () {
+      document.getElementById("promptInput").value = "";
+      document.getElementById("outputArea").style.display = "none";
+      document.getElementById("progressCard").style.display = "none";
+      window.showToast("تم مسح الحقل");
+    };
+
+    // Clean Markdown Fences if Returned
+    window.cleanRawCode = function (text) {
+      if (!text) return "";
+      var out = text.trim();
+      var match = out.match(/```[a-zA-Z0-9+#]*\s*([\s\S]*?)```/);
+      if (match && match[1]) {
+        out = match[1].trim();
+      } else {
+        out = out.replace(/^```[a-zA-Z0-9+#]*\s*/i, "").replace(/```$/i, "").trim();
+      }
+      return out;
+    };
+
+    // Lightweight Syntax Highlighter for Display
+    window.formatHighlightedCode = function (code) {
+      var escaped = code
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+      return escaped
+        .replace(/(&lt;!--[\s\S]*?--&gt;|\/\/.*$|#.*$)/gm, '<span class="tok-com">$1</span>')
+        .replace(/(&lt;\/?[a-zA-Z0-9\-]+)/g, '<span class="tok-tag">$1</span>')
+        .replace(/("[^"\n]*"|'[^'\n]*')/g, '<span class="tok-str">$1</span>')
+        .replace(/\b(function|const|let|var|return|if|else|for|while|class|public|private|static|void|int|string|bool|float|double|def|import|from|echo|namespace|using|include)\b/g, '<span class="tok-kw">$1</span>');
+    };
+
+    // Built-in Gemini API Call with Exponential Backoff (No External API Key Needed)
+    window.fetchGeneratedCode = async function (arabicPrompt, langConfig) {
+      var apiKey = ""; // Provided automatically by runtime environment
+      var apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=" + apiKey;
+
+      var langSpecificGuide = "";
+      if (langConfig.id === "web") {
+        langSpecificGuide =
+          "Generate a complete, single-file HTML5 application (with embedded <style> and <script>) that is visually stunning, responsive, supports Arabic RTL nicely, and runs smoothly in an iframe sandbox. Never use alert() or confirm().";
+      } else {
+        langSpecificGuide =
+          "Generate complete, clean, well-commented, production-ready raw source code strictly in " + langConfig.label + " (" + langConfig.ext + "). Do not wrap the code in HTML unless requested; provide pure runnable " + langConfig.label + " code.";
+      }
+
+      var systemInstruction =
+        "You are OMAR DEV ENGINE, an expert multi-language software architect. " +
+        "Take the user's Arabic description and write 100% custom, accurate, bug-free source code tailored specifically to their exact request. " +
+        langSpecificGuide + "\n" +
+        "Return a valid JSON object with exactly 3 keys:\n" +
+        "- 'code': the complete raw source code string without markdown backticks.\n" +
+        "- 'explanation': a clear, concise Arabic explanation of how the code works.\n" +
+        "- 'fileName': a clean descriptive filename ending with '" + langConfig.ext + "'.";
+
+      var payload = {
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: "اللغة المطلوبة: " + langConfig.label + "\nوصف المشروع بالعربية: " + arabicPrompt }]
+          }
+        ],
+        systemInstruction: {
+          parts: [{ text: systemInstruction }]
+        },
+        generationConfig: {
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: "OBJECT",
+            properties: {
+              code: { type: "STRING" },
+              explanation: { type: "STRING" },
+              fileName: { type: "STRING" }
+            },
+            required: ["code", "explanation", "fileName"]
+          }
+        }
+      };
+
+      var maxRetries = 4;
+      var delay = 1000;
+
+      for (var attempt = 0; attempt <= maxRetries; attempt++) {
+        try {
+          var res = await fetch(apiUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          if (!res.ok) {
+            throw new Error("API status " + res.status);
+          }
+
+          var data = await res.json();
+          var text = data && data.candidates && data.candidates[0] &&
+                     data.candidates[0].content && data.candidates[0].content.parts &&
+                     data.candidates[0].content.parts[0] && data.candidates[0].content.parts[0].text;
+
+          if (!text) {
+            throw new Error("Empty response");
+          }
+
+          var parsed = JSON.parse(text);
+          var cleanCode = window.cleanRawCode(parsed.code);
+          var fileName = parsed.fileName || langConfig.defaultFile;
+          if (!fileName.endsWith(langConfig.ext)) {
+            fileName = fileName.replace(/\.[^/.]+$/, "") + langConfig.ext;
+          }
+
+          return {
+            code: cleanCode,
+            explanation: parsed.explanation || "تم توليد الكود المخصص بنجاح.",
+            fileName: fileName
+          };
+        } catch (err) {
+          if (attempt === maxRetries) {
+            throw err;
+          }
+          await new Promise(function (resolve) { setTimeout(resolve, delay); });
+          delay *= 2;
+        }
+      }
+    };
+
+    // Main Generate Action
+    window.runAIGenerator = async function () {
+      var promptVal = document.getElementById("promptInput").value.trim();
+      if (!promptVal) {
+        window.showToast("من فضلك اكتب وصف الكود أو المشروع أولاً!");
+        document.getElementById("promptInput").focus();
+        return;
+      }
+
+      var langConfig = window.LANGUAGES[window.selectedLang];
+      var btnGen = document.getElementById("btnGenerate");
+      var progressCard = document.getElementById("progressCard");
+      var progressStatus = document.getElementById("progressStatus");
+      var outputArea = document.getElementById("outputArea");
+
+      btnGen.disabled = true;
+      btnGen.textContent = "جاري البرمجة بالذكاء الاصطناعي...";
+      outputArea.style.display = "none";
+      progressCard.style.display = "block";
+      progressStatus.textContent = "جاري كتابة كود " + langConfig.label + " المخصص لطلبك...";
+
+      try {
+        var result = await window.fetchGeneratedCode(promptVal, langConfig);
+
+        window.rawGeneratedCode = result.code;
+        window.currentFileName = result.fileName;
+
+        // Populate Top Sticky Code Header & Viewer
+        document.getElementById("badgeOutputLang").textContent = langConfig.badge;
+        document.getElementById("labelOutputFile").textContent = result.fileName;
+        document.getElementById("codeDisplay").innerHTML = window.formatHighlightedCode(result.code);
+        document.getElementById("explainText").innerHTML = result.explanation.replace(/\n/g, "<br>");
+
+        // Reset Copy Button State
+        var copyBtn = document.getElementById("btnCopyTop");
+        copyBtn.className = "btn-copy-top";
+        copyBtn.innerHTML = '<span>نسخ الكود</span><span>&#128203;</span>';
+
+        // Handle Live Sandbox Preview for Web Mode
+        var previewCard = document.getElementById("previewCard");
+        var sandbox = document.getElementById("liveSandbox");
+        if (langConfig.id === "web") {
+          sandbox.srcdoc = result.code;
+          previewCard.style.display = "block";
+        } else {
+          sandbox.srcdoc = "";
+          previewCard.style.display = "none";
+        }
+
+        progressCard.style.display = "none";
+        outputArea.style.display = "block";
+        window.showToast("تم توليد الكود بنجاح! يمكنك نسخه من الأعلى ✨");
+      } catch (e) {
+        progressCard.style.display = "none";
+        window.showToast("حدث خطأ أثناء التوليد، حاول مرة أخرى.");
+      } finally {
+        btnGen.disabled = false;
+        btnGen.innerHTML = "توليد الكود الآن &#9889;";
+      }
+    };
+
+    // Instant Top Copy Code Handler (iFrame & Mobile Safe)
+    window.copyRawCode = function () {
+      if (!window.rawGeneratedCode) return;
+
+      var copiedSuccess = false;
+      try {
+        var tempArea = document.createElement("textarea");
+        tempArea.value = window.rawGeneratedCode;
+        tempArea.style.position = "fixed";
+        tempArea.style.top = "-9999px";
+        tempArea.style.left = "-9999px";
+        document.body.appendChild(tempArea);
+        tempArea.focus();
+        tempArea.select();
+        copiedSuccess = document.execCommand("copy");
+        document.body.removeChild(tempArea);
+      } catch (err) {
+        copiedSuccess = false;
+      }
+
+      if (!copiedSuccess && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(window.rawGeneratedCode);
+      }
+
+      var copyBtn = document.getElementById("btnCopyTop");
+      copyBtn.className = "btn-copy-top copied";
+      copyBtn.innerHTML = '<span>تم النسخ بنجاح! &#10003;</span>';
+      window.showToast("تم النسخ بنجاح! ✓");
+
+      clearTimeout(window._copyResetTimer);
+      window._copyResetTimer = setTimeout(function () {
+        copyBtn.className = "btn-copy-top";
+        copyBtn.innerHTML = '<span>نسخ الكود</span><span>&#128203;</span>';
+      }, 2500);
+    };
+
+    // Download File Handler with Proper Extension
+    window.downloadRawCode = function () {
+      if (!window.rawGeneratedCode) return;
+      var langConfig = window.LANGUAGES[window.selectedLang];
+      var fileName = window.currentFileName || langConfig.defaultFile;
+      var blob = new Blob([window.rawGeneratedCode], { type: langConfig.mime });
+      var url = URL.createObjectURL(blob);
+      var link = document.createElement("a");
+      link.href = url;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      window.showToast("جاري تحميل الملف: " + fileName);
+    };
+
+    // Sandbox Controls
+    window.refreshSandbox = function () {
+      var sandbox = document.getElementById("liveSandbox");
+      sandbox.srcdoc = "";
+      setTimeout(function () {
+        sandbox.srcdoc = window.rawGeneratedCode;
+        window.showToast("تم تحديث المعاينة الحية");
+      }, 60);
+    };
+
+    window.toggleSandbox = function () {
+      var sandbox = document.getElementById("liveSandbox");
+      sandbox.style.display = sandbox.style.display === "none" ? "block" : "none";
+    };
+
+    // Initialize Default Chips on Load
+    window.renderPromptChips("web");
+  </script>
+</body>
+</html>
+```
